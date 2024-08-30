@@ -1,0 +1,16 @@
+.snurf, .blurdb {
+  font-family: Arial;
+  font-size: 18px;
+  font-weight: bold;
+  border: 1px solid black;
+}
+
+.blurdb {
+  background-color: orange;
+}
+
+.snurf {
+  background-color: purple;
+}
+
+/*# sourceMappingURL=inheritance.css.map */

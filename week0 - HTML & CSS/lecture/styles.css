@@ -1,0 +1,16 @@
+h1 {
+    color: blue;
+    text-align: center;
+}
+
+.class {
+    color: red;
+}
+
+#id {
+    color: purple;
+}
+
+h1 > h2 {
+    font-weight: bold;
+}

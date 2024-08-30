@@ -1,0 +1,16 @@
+%message {
+    font-family: Arial;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid black;
+}
+
+.blurdb {
+    @extend %message;
+    background-color: orange;
+}
+
+.snurf {
+    @extend %message;
+    background-color: purple;
+}
