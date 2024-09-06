@@ -2,19 +2,26 @@
 <html lang="en">
     <head>
         <title>Advanced Search</title>
-        <link rel="stylesheet" href="search.css">
+        <link rel="stylesheet" href="advanced.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div class="navbar">
-            <a href="index.html">Google Search</a>
-        </div>
-        <div class="searchbar">
+        <div class="container">
             <img src="Gongle.png" id="banner">
-            <form action="https://www.google.com/advanced_search">
-                <input type="text" name="q"><br>
-                <input type="submit" value="Google Search">
-            </form>
+            <h3 class="header">Advanced Search</h3>
+            <div class="navbar">
+                <a href="index.html">Gongle Search</a>
+            </div>
+            <div class="searchbar">
+                <form action="https://www.google.com/advanced_search">
+                    <p>Find pages with...</p>
+                    <label>all these words:</label><input type="text" name="q"><br>
+                    <label>this exact word or phrase:</label><input type="text" name="q"><br>
+                    <label>any of these words:</label><input type="text" name="q"><br>
+                    <label>none of these words:</label><input type="text" name="q"><br>
+                    <input type="submit" value="Advanced Search" id="advancedbutton">
+                </form>
+            </div>
         </div>
     </body>
 </html>

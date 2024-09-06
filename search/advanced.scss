@@ -1,0 +1,86 @@
+.navbar {
+    grid-area: navbar;
+    justify-self: end;
+    a {
+        font-size: 14px;
+        color: black;
+        text-decoration: none;
+        font-family: Arial, sans-serif;
+        margin: 10px;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+}
+
+.container {
+    display: grid;
+    height: 95vh;
+    width: 95vw;
+    grid-template-areas:
+        "navbar navbar navbar navbar"
+        "header header header header"
+        "input input . ."
+        "input input . ."
+        " . . . .";
+    grid-template-rows: .25fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 0px;
+}
+
+.searchbar {
+    grid-area: input;
+    display: flex;
+    justify-content: start;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    max-width: 600px;
+}
+
+input[name=q] {
+    height: 40px;
+    border-radius: 25px;
+    border: 1px solid lightgrey;
+    padding-left: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.header {
+    grid-area: header;
+    color: rgb(217, 48, 37);
+    font-size: 20px;
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-left: 30px;
+}
+
+#advancedbutton {
+    height: 35px;
+    width: 140px;
+    font-size: 11px;
+    font-weight: 700;
+    font-style: normal;
+    font-family: Arial;
+    border: 0px;
+    background-color: rgb(77, 144, 254);
+    border: 1px solid rgb(48, 121, 237);
+    border-radius: 2px;
+    color: white;
+    justify-self: end;
+    outline-color: white;
+}
+
+#banner {
+    height: 40px;
+    grid-area: navbar;
+    justify-self: start;
+    margin: 10px;
+}
