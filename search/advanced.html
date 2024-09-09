@@ -8,17 +8,24 @@
     <body>
         <div class="container">
             <img src="Gongle.png" id="banner">
-            <h3 class="header">Advanced Search</h3>
             <div class="navbar">
                 <a href="index.html">Gongle Search</a>
             </div>
-            <div class="searchbar">
-                <form action="https://www.google.com/advanced_search">
-                    <p>Find pages with...</p>
-                    <label>all these words:</label><input type="text" name="q"><br>
-                    <label>this exact word or phrase:</label><input type="text" name="q"><br>
-                    <label>any of these words:</label><input type="text" name="q"><br>
-                    <label>none of these words:</label><input type="text" name="q"><br>
+            <h3 class="header">Advanced Search</h3>
+            <div class="line"></div>
+            <div id="find">Find pages with...</div>
+            <div class="test">
+                <div class="label">all these words:</div>
+                <div class="label">this exact word or phrase:</div>
+                <div class="label">any of these words:</div>
+                <div class="label">none of these words:</div>
+            </div>
+            <div class="searchbar">          
+                <form action="https://www.google.com/search">  
+                    <input type="text" class="search" name="as_q">
+                    <input type="text" class="search" name="as_epq">
+                    <input type="text" class="search" name="as_oq">
+                    <input type="text" class="search" name="as_eq">
                     <input type="submit" value="Advanced Search" id="advancedbutton">
                 </form>
             </div>

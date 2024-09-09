@@ -51,11 +51,29 @@ input[name=q] {
     max-width: 600px;
 }
 
-#searchbutton {
+input[name=q]:hover {
+    box-shadow: 0px 2px 5px rgb(200, 200, 200);
+    border: 1px solid rgb(220, 220, 220)
+}
+
+#buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchbutton {
     height: 35px;
     width: 140px;
     font-size: 15px;
     border: 0px;
+    border-radius: 5px;
+    margin-left: 15px;
+    background-color: rgb(248, 249, 250)
+}
+
+.searchbutton:hover {
+    box-shadow: 0px 1px 3px rgb(200, 200, 200);
+    border: 1px solid rgb(220, 220, 220)
 }
 
 #banner {
