@@ -54,7 +54,29 @@ def new_entry(request):
         entries = util.list_entries()
         if title in entries:
             return render(request, "encyclopedia/error.html", {
-                "error": "This page already exists, no need to overwrite it, just edit if you'd like!"
+                "error": "This page already exists, use the edit page if you'd like to change the content!"
             })
         util.save_entry(title, new_entry)
         return HttpResponseRedirect(reverse("entry", args=[title]))
+    
+def edit_entry(request, title):
+    if request.method == "GET":
+        return render(request, "encyclopedia/edit_entry.html", {
+            "title": title,
+            "entry": util.get_entry(title)
+        })
+    if request.method == "POST":
+        form = request.POST
+        name = form['title']
+        edits = form['entry']
+        entries = util.list_entries()
+
+        if name not in entries:
+            return render(request, "encyclopedia/error.html", {
+                "error": "Entry does not exist, go to \"Create New Page\" if you'd like to create one!"
+            })
+        
+        util.save_entry(name, edits)
+        return HttpResponseRedirect(reverse("entry", args=[name]))
+        #ADD SERVER-SIDE VALIDATION HERE FOR EDITED ENTRY THAT IS NOT IN THE LIST OF ENTRIES
+        

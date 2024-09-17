@@ -28,6 +28,12 @@ h1 {
     padding: 20px;
 }
 
+.navbar {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+}
+
 .sidebar h2 {
     margin-top: 5px;
 }

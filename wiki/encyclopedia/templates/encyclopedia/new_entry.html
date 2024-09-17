@@ -8,7 +8,7 @@
     <form action="{% url 'new_entry' %}" method="post">
         {% csrf_token %}
         <input name="title" placeholder="Title" autofocus><br>
-        <textarea name="new_entry" cols="60">Write your entry here, be sure to use Markdown syntax for formatting headers, text style, paragraph breaks, etc.</textarea>
+        <textarea name="new_entry" cols="80" rows="20">Write your entry here, be sure to use Markdown syntax for formatting headers, text style, paragraph breaks, etc.</textarea><br>
         <input type="submit">
     </form>
 
