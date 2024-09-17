@@ -1,0 +1,15 @@
+{% extends 'encyclopedia/layout.html' %}
+{% block title %}New Entry{% endblock %}
+
+{% block body %}
+
+    <h1>New Entry</h1>
+    <h6>Note: this wiki uses Markdown formatting. Visit <a href="markdownguide.org/basic-syntax/">this site</a> for a primer on Markdown syntax</h6>
+    <form action="{% url 'new_entry' %}" method="post">
+        {% csrf_token %}
+        <input name="title" placeholder="Title" autofocus>
+        <textarea name="new_entry" rows="30" cols="30">Write your entry here, be sure to use Markdown syntax for formatting headers, text style, paragraph breaks, etc.</textarea>
+        <input type="submit">
+    </form>
+
+{% endblock %}

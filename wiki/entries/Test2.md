@@ -1,0 +1,1 @@
+We should be taken to the page we just created here
