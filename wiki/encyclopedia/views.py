@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-import markdown2
-import re
+import re, markdown2, random
 from . import util
 
 
@@ -70,7 +69,6 @@ def edit_entry(request, title):
         name = form['title']
         edits = form['entry']
         entries = util.list_entries()
-
         if name not in entries:
             return render(request, "encyclopedia/error.html", {
                 "error": "Entry does not exist, go to \"Create New Page\" if you'd like to create one!"
@@ -78,5 +76,10 @@ def edit_entry(request, title):
         
         util.save_entry(name, edits)
         return HttpResponseRedirect(reverse("entry", args=[name]))
-        #ADD SERVER-SIDE VALIDATION HERE FOR EDITED ENTRY THAT IS NOT IN THE LIST OF ENTRIES
+    
+def random_page(request):
+    calc = random.Random()
+    entries = util.list_entries()
+    random_entry = entries[calc.randrange(0, len(entries), 1)]
+    return HttpResponseRedirect(reverse("entry", args=[random_entry]))
         

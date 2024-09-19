@@ -4,7 +4,6 @@
 
 {% block body %}
 
-    <h1>THIS PAGE WORKS</h1>
     <form action="{% url 'edit_entry' title %}" method="post">
         {% csrf_token %}
         <input type="text" name="title" placeholder="{{ title }}" value="{{ title }}"><br>
