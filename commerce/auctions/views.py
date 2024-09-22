@@ -3,10 +3,10 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django import forms
 
-from .models import User
-
-
+from .models import User, Bid, Listing, Comment
+    
 def index(request):
     return render(request, "auctions/index.html")
 
@@ -61,3 +61,15 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+
+def new_listing(request):
+    if request.method == "GET":
+        class ListingForm(forms.ModelForm):
+            class Meta:
+                model = Listing
+                fields = ["item_name", "starting_price", "buyout_price", "expiration"]
+        form = ListingForm()
+        return render(request, "auctions/new_listing.html", {
+            "form": form
+        })

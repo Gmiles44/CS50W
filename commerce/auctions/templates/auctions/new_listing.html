@@ -1,0 +1,15 @@
+{% extends 'auctions/layout.html' %}
+
+{% block body %}
+
+    <h2>New Listing</h2>
+
+    <form action="{% url 'new_listing' %}" method="post">
+        <input type="text" name="item_name" placeholder="Listing Title">
+        <input 
+        <input type="submit">
+    </form>
+
+    {{ form }}
+
+{% endblock %}
