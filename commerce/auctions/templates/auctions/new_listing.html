@@ -3,13 +3,10 @@
 {% block body %}
 
     <h2>New Listing</h2>
-
     <form action="{% url 'new_listing' %}" method="post">
-        <input type="text" name="item_name" placeholder="Listing Title">
-        <input 
-        <input type="submit">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Post Listing</button>
     </form>
-
-    {{ form }}
 
 {% endblock %}

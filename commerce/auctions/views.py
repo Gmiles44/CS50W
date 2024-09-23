@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from django import forms
+from datetime import date
 
 from .models import User, Bid, Listing, Comment
     
@@ -64,12 +65,27 @@ def register(request):
 
 
 def new_listing(request):
+    class ListingForm(forms.ModelForm):
+        class Meta:
+            today = date.today()
+            model = Listing
+            fields = ["item_name", "starting_price", "buyout_price", "expiration", "description", "image"]
+            widgets = {
+                'expiration': forms.DateInput(attrs={'type': 'date', 'min': f'{today}'})
+            }
     if request.method == "GET":
-        class ListingForm(forms.ModelForm):
-            class Meta:
-                model = Listing
-                fields = ["item_name", "starting_price", "buyout_price", "expiration"]
         form = ListingForm()
         return render(request, "auctions/new_listing.html", {
             "form": form
         })
+    
+    if request.method == "POST":
+        form = ListingForm(request.POST)
+        if form.is_valid():
+            listing = Listing()
+            clean_form = form.cleaned_data
+            for field in clean_form:
+                setattr(listing, field, clean_form[field])
+            print(listing)
+
+        return HttpResponseRedirect(reverse("new_listing"))

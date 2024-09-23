@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django import forms
 
 
 class User(AbstractUser):
@@ -12,6 +13,7 @@ class Listing(models.Model):
     buyout_price = models.DecimalField(max_digits=12, decimal_places=2)
     expiration = models.DateTimeField()
     description = models.TextField()
+    image = models.ImageField(null=True, blank=True)
 
 class Bid(models.Model):
     item = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="bids")
