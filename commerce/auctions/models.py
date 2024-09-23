@@ -4,6 +4,8 @@ from django import forms
 
 
 class User(AbstractUser):
+    def __str__(self):
+        return f"{self.username}: {self.id}"
     pass
 
 class Listing(models.Model):
@@ -14,6 +16,9 @@ class Listing(models.Model):
     expiration = models.DateTimeField()
     description = models.TextField()
     image = models.ImageField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.item_name}, posted by {self.user.username}"
 
 class Bid(models.Model):
     item = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name="bids")

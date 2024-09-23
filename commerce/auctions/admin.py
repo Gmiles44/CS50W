@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import User, Listing, Bid
+from .models import User, Listing, Bid, Comment
 
 class ListingAdmin(admin.ModelAdmin):
     list_display = ("item_name", "starting_price")
@@ -10,3 +10,4 @@ class ListingAdmin(admin.ModelAdmin):
 admin.site.register(Listing, ListingAdmin)
 admin.site.register(User)
 admin.site.register(Bid)
+admin.site.register(Comment)

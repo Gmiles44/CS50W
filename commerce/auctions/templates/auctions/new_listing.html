@@ -2,6 +2,17 @@
 
 {% block body %}
 
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                {{ message }}
+            </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    </ul>
     <h2>New Listing</h2>
     <form action="{% url 'new_listing' %}" method="post">
         {% csrf_token %}

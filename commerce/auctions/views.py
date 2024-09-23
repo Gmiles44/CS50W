@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -9,7 +10,10 @@ from datetime import date
 from .models import User, Bid, Listing, Comment
     
 def index(request):
-    return render(request, "auctions/index.html")
+    listings = Listing.objects.all()
+    return render(request, "auctions/index.html", {
+        "listings": listings
+    })
 
 
 def login_view(request):
@@ -84,8 +88,14 @@ def new_listing(request):
         if form.is_valid():
             listing = Listing()
             clean_form = form.cleaned_data
+            if clean_form["starting_price"] > clean_form["buyout_price"]:
+                return render(request, "auctions/new_listing.html", {
+                    "form": form,
+                    "messages": ["Buyout price must be higher than starting bid!"]
+                })
             for field in clean_form:
                 setattr(listing, field, clean_form[field])
-            print(listing)
+            setattr(listing, "user_id", request.user.id)
+            listing.save()
 
         return HttpResponseRedirect(reverse("new_listing"))
