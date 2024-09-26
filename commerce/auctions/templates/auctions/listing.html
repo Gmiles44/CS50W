@@ -1,0 +1,15 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+<div id="container">
+    <h3>{{ listing.item_name }}</h3>
+    {% if listing.image %}<img src="/static/auctions/{{ listing.image }}">{% endif %}
+    <h4>{{ listing.description }}</h4>
+    <h4>Starting Bid: {{ listing.starting_price }}</h4>
+    <h4>Current Bid: {{ listing.bids }}</h4>
+    <h4>Buyout Price: {{ listing.buyout_price }}</h4>
+    <h4>Expiration: {{ listing.expiration }}</h4>
+</div>
+
+{% endblock %}
