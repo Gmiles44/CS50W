@@ -6,10 +6,22 @@
     <h3>{{ listing.item_name }}</h3>
     {% if listing.image %}<img src="/static/auctions/{{ listing.image }}">{% endif %}
     <h4>{{ listing.description }}</h4>
+    {% if price %}
+    <h4>Current Bid: {{ price }}</h4>
+    {% else %}
     <h4>Starting Bid: {{ listing.starting_price }}</h4>
-    <h4>Current Bid: {{ listing.bids }}</h4>
+    {% endif %}
     <h4>Buyout Price: {{ listing.buyout_price }}</h4>
     <h4>Expiration: {{ listing.expiration }}</h4>
+    {% if listing.user.id == request.user.id %}
+    <h1>THIS WAS POSTED BY YOU</h1>
+    {% else %}
+    <form action="{% url 'listing' listing.id %}" method="post">
+        {% csrf_token %}
+        <input type="number" min="{{ minimum_bid }}" step=".01">
+        <input type="submit" value="Bid">
+    </form>
+    {% endif %}
 </div>
 
 {% endblock %}

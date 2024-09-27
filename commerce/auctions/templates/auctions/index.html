@@ -8,10 +8,13 @@
         <h3><a href="{% url 'listing' listing.id %}">{{ listing.item_name }}</a></h3>
         {% if listing.image %}<img src="/static/auctions/{{ listing.image }}">{% endif %}
         <h4>{{ listing.description }}</h4>
-        <h4>Starting Bid: {{ listing.starting_price }}</h4>
-        <h4>Current Bid: {{ listing.bids }}</h4>
+        {% if listing.bids.first %}
+        <h4>Current Price: {{ listing.bids.first.amount }}</h4>
+        {% else %}
+        <h4>Starting Price: {{ listing.starting_price }}</h4>
+        {% endif %}
         <h4>Buyout Price: {{ listing.buyout_price }}</h4>
-        <h4>Expiration: {{ listing.expiration }}</h4>
+        <h4>Expires: {{ listing.expiration }}</h4>
     </div>
     {% endfor %}
 {% endblock %}

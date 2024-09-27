@@ -15,14 +15,46 @@ def index(request):
         "listings": listings
     })
 
-def listing(request, id):
-    object = Listing.objects.get(id=f"{id}")
-    print(object)
-    print(object.buyout_price)
-    return render(request, "auctions/listing.html", {
-        "listing": object
-    })
+#################################
 
+def listing(request, id):
+    class BidForm(forms.ModelForm):
+        class Meta:
+            model = Bid
+            fields = ["amount"]
+    object = Listing.objects.get(id=f"{id}")
+    if request.method == "GET":
+        form = BidForm()
+        if not object.bids.all():
+            bid_amount = None
+            minimum_bid = object.starting_price
+        else:
+            highest_bid = object.bids.last() 
+            bid_amount = highest_bid.amount
+            minimum_bid = float(bid_amount) + .25
+        return render(request, "auctions/listing.html", {
+            "listing": object,
+            "price": bid_amount,
+            "minimum_bid": minimum_bid,
+            "form": form
+        })
+    if request.method == "POST":
+        form = BidForm(request.POST)
+        if form.is_valid():
+            bid = Bid()
+            clean_form = form.cleaned_data
+            if clean_form["amount"] < object.bids.first().amount:
+                return render(request, "auctions/listing.html", {
+                    "form": form,
+                    "messages": ["Buyout price must be higher than starting bid!"]
+                })
+            for field in clean_form:
+                setattr(bid, field, clean_form[field])
+            setattr(bid, "user_id", request.user.id)
+            bid.save()
+        return HttpResponseRedirect(reverse("listing", args=[object.id]))
+
+#################################
 def login_view(request):
     if request.method == "POST":
 
@@ -42,11 +74,13 @@ def login_view(request):
     else:
         return render(request, "auctions/login.html")
 
+########################################
 
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
 
+#################################
 
 def register(request):
     if request.method == "POST":
@@ -74,13 +108,14 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
+##########################################
 
 def new_listing(request):
     class ListingForm(forms.ModelForm):
         class Meta:
             today = date.today()
             model = Listing
-            fields = ["item_name", "starting_price", "buyout_price", "expiration", "description", "image"]
+            fields = ["item_name", "category", "starting_price", "buyout_price", "expiration", "description", "image"]
             widgets = {
                 'expiration': forms.DateInput(attrs={'type': 'date', 'min': f'{today}'})
             }
@@ -105,4 +140,4 @@ def new_listing(request):
             setattr(listing, "user_id", request.user.id)
             listing.save()
 
-        return HttpResponseRedirect(reverse("new_listing"))
+        return HttpResponseRedirect(reverse("index"))
